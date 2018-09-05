@@ -2,27 +2,12 @@ import React from 'react';
 import './current.css';
 // import weatherPic from './'
 
-const weatherImages = [
-	{dayClear: './sun.svg'},
-	{nightClear: './moon-phase-outline.svg'},
-	{stormy: './t-storm.svg'},
-	{dayRain: './rainy.svg'},
-	{nightRain: './rainy-cloud-at-night.svg'},
-	{cloudy: './cloud.svg'},
-	{partlyCloudyDay: './partly-cloudy.svg'},
-	{partlyCloudyNight: './dark-night.svg'},
-	{snowy: './snowy.svg'},
-	{windy: './windy.svg'}
-]
-
 function Current(props) {
-
-console.log(props.data.current_observation);
 
 	return (
 		<div className="current">
 			<aside className="weather-img-aside">
-				<img src={props.data.current_observation.icon_url} alt="partlycloudy" className="weather-img"/>
+			<WeatherImage />
 				<h2 className="weather-description">{props.data.current_observation.weather}</h2>
 			</aside>
 			<article>
