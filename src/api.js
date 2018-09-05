@@ -2862,3 +2862,7 @@ const data = {
     },
   ],
 };
+
+export{
+  data
+}
