@@ -12,9 +12,9 @@ function Current() {
 			</aside>
 			<article>
 				<h1 className="temperature">72°</h1>
-				<h2 className="wind"><span className="weather-label">Wind - </span> NNE 5 mph</h2>
-				<h2 className="humidity"><span className="weather-label">Humidity - </span> 24%</h2>
-				<h2 className="visibility"><span className="weather-label">Visibility - </span> 10.0 mi</h2>
+				<h2 className="wind"><span className="weather-label wind-data">Wind - </span> NNE 5 mph</h2>
+				<h2 className="humidity"><span className="weather-label humidity-data">Humidity - </span> 24%</h2>
+				<h2 className="visibility"><span className="weather-label visibility-data">Visibility - </span> 10.0 mi</h2>
 			</article>
 		</div>
 	)
