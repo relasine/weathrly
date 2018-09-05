@@ -93,3 +93,30 @@ article {
     margin-bottom: 0;
   }
 }
+
+@media (max-width: 475px) {
+  .weather-img {
+    width: 200px;
+  }
+
+  .temperature {
+    font-size: 7rem;
+  }
+
+  .weather-label,
+  .wind,
+  .humidity,
+  .visbility {
+    font-size: 1.4rem;
+  }
+
+  .wind,
+  .humidity,
+  .visibility {
+    margin: 1rem 0; 
+  }
+
+  .weather-description {
+    font-size: 1.6rem;
+  }
+}
