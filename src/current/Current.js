@@ -8,7 +8,7 @@ function Current(props) {
 	return (
 		<div className="current">
 			<aside className="weather-img-aside">
-			<WeatherImage icon={props.data.icon}/>
+				<WeatherImage icon={props.data.icon}/>
 				<h2 className="weather-description">{props.data.weather}</h2>
 			</aside>
 			<article>

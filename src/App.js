@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Current from './current/Current'
-import { data } from './api.js'
+import Current from './current/Current';
+import SevenHour from './SevenHour/SevenHour';
+import { data } from './api.js';
 
 class App extends Component {
   constructor(){
@@ -15,10 +16,10 @@ class App extends Component {
 
   render() {
 
-    console.log({data});
     return (
       <div className="App">
-        <Current data={ this.state.data.current_observation }/>
+        <Current data={ this.state.data.current_observation } />
+        <SevenHour data={ this.state.data.hourly_forecast } /> 
       </div>
     );
   }
