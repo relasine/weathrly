@@ -19,10 +19,10 @@ const weatherIcons = {
   nt_chancesnow: './snowy.svg'
   };
  
-function WeatherImage(props) {
+function ForecastImage(props) {
   return (
-    <img src={weatherIcons[props.icon]} alt={props.icon} className="weather-img"/>
+    <img src={weatherIcons[props.icon]} alt={props.icon} className="forecast-img"/>
   )
 }
 
-export default WeatherImage;
+export default ForecastImage;
