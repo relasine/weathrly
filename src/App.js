@@ -18,7 +18,7 @@ class App extends Component {
     console.log({data});
     return (
       <div className="App">
-        <Current data={ this.state.data }/>
+        <Current data={ this.state.data.current_observation }/>
       </div>
     );
   }

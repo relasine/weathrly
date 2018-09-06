@@ -1,33 +1,30 @@
 import React from 'react';
 
-import Current from './current/Current.js';
+import Current from '../current/Current.js';
 
-const weatherImages = [
-  {image: './sun.svg', property: 'clear'},
-  {image: './moon-phase-outline.svg', property: 'nt_clear'},
-  {image: './t-storm.svg'},
-  {image: './rainy.svg', property: 'rain'},
-  {image: './rainy-cloud-at-night.svg', property: 'nt_rain'},
-  {image: './rainy.svg', property: 'chancerain'},
-  {image: './rainy-cloud-at-night.svg', property: 'nt_chancerain'},
-  {image: './cloud.svg', property: 'cloudy'},
-  {image: './cloud.svg', property: 'nt_cloudy'},
-  {image: './partly-cloudy.svg', property: 'partlycloudy'},
-  {image: './dark-night.svg', property: 'nt_partlycloudy'},
-  {image: './snowy.svg', property: 'snow'},
-  {image: './snowy.svg', property: 'nt_snow'},
-  {image: './snowy.svg', property: 'chancesnow'},
-  {image: './snowy.svg', property: 'nt_chancesnow'},
-  {image: './windy.svg'}
-]
-
-function WeatherImage(props){
-
-  changeImage(){
-
-  }
-
-  return(
-    <img src={this.changeImage} alt="partlycloudy" className="weather-img"/>
+const weatherIcons = {
+  clear: './sun.svg',
+  nt_clear: './moon-phase-outline.svg',
+  rain: './rainy.svg',
+  nt_rain: './rainy-cloud-at-night.svg',
+  chancerain: './rainy.svg',
+  nt_chancerain: './rainy-cloud-at-night.svg',
+  cloudy: './cloud.svg',
+  nt_cloudy: './cloud.svg',
+  partlycloudy: './partly-cloudy.svg',
+  nt_partlycloudy: './dark-night.svg',
+  mostlycloudy: './partly-cloudy.svg',
+  nt_mostlycloudy: './dark-night.svg',
+  snow: './snowy.svg',
+  nt_snow: './snowy.svg',
+  chancesnow: './snowy.svg',
+  nt_chancesnow: './snowy.svg'
+  };
+ 
+function WeatherImage(props) {
+  return (
+    <img src={weatherIcons[props.icon]} alt={props.icon]} className="weather-img"/>
   )
 }
+
+export default WeatherImage;
