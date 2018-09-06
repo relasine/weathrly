@@ -23,7 +23,7 @@ const weatherIcons = {
  
 function WeatherImage(props) {
   return (
-    <img src={weatherIcons[props.icon]} alt={props.icon]} className="weather-img"/>
+    <img src={weatherIcons[props.icon]} alt={props.icon} className="weather-img"/>
   )
 }
 
