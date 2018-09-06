@@ -1,0 +1,8 @@
+.seven-hour {
+  display: flex;
+  background:rgba(0,0,0,0.5);
+  justify-content: space-between;
+  margin: auto;
+  font-size: 1.2rem;
+  max-width: 70rem;
+}

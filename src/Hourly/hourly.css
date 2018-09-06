@@ -1,5 +1,9 @@
-
+.hourly-weather {
+  margin: 0 1rem;
+  color: #FFF;
+  text-align: center;
+}
 
 .forecast-img {
-  width: 40px;
+  width: 60px;
 }
