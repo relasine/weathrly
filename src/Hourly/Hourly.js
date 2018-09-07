@@ -5,6 +5,7 @@ import './hourly.css';
 
 function Hourly(props) {
 
+  
   return (
     <section className="hourly-weather">
       <h3>{props.data.FCTTIME.civil}</h3>
