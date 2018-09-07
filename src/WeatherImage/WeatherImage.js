@@ -18,7 +18,7 @@ const weatherIcons = {
   chancesnow: './snowy.svg',
   nt_chancesnow: './snowy.svg'
   };
- 
+
 function WeatherImage(props) {
   return (
     <img src={weatherIcons[props.icon]} alt={props.icon} className="weather-img"/>
