@@ -1,0 +1,8 @@
+.ten-day {
+  display: flex;
+  justify-content: space-around;
+  max-width: 100rem;
+  margin: auto;
+  background:rgba(0,0,0,0.5);
+
+}

@@ -8,7 +8,8 @@ function Hourly(props) {
   return (
     <section className="hourly-weather">
       <h3>{props.data.FCTTIME.civil}</h3>
-      <ForecastImage icon={props.data.icon} />
+      <ForecastImage  icon={props.data.icon}
+                      classLabel="forecast-img" />
       <h3>{props.data.temp.english}°</h3>
     </section>
   )
