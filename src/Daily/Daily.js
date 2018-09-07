@@ -1,18 +1,20 @@
 import React from 'react'
 
 import ForecastImage from '../ForecastImage/ForecastImage'
-import './hourly.css';
+import './daily.css';
 
-function Hourly(props) {
+function Daily(props) {
+
+  const temp = parseInt(props.data.fcttext.match(/[0-9]+/)[0], 10);
 
   return (
     <section className="hourly-weather">
-      <h3>{props.data.FCTTIME.civil}</h3>
+      <h3>{props.data.title}</h3>
       <ForecastImage icon={props.data.icon} />
-      <h3>{props.data.temp.english}°</h3>
+      <h3>{temp}°</h3>
     </section>
   )
 
 }
 
-export default Hourly;
+export default Daily;
