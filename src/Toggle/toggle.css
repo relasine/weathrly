@@ -9,16 +9,20 @@
 }
 
 .seven-hour-toggle,
-.ten-day-toggle {
+.ten-day-toggle,
+.seven-hour-toggle-selected,
+.ten-day-toggle-selected {
   margin: auto;
 }
 
-.seven-hour-toggle {
+.seven-hour-toggle-selected,
+.ten-day-toggle-selected {
   font-weight: 800;
   color: #FFF;
 }
 
-.ten-day-toggle {
+.ten-day-toggle,
+.seven-hour-toggle {
   font-weight: 300;
   color: #C9C9C9;
 }

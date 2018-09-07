@@ -1,5 +1,5 @@
 .ten-day {
-  display: none;
+  display: flex;
   justify-content: space-around;
   max-width: 100rem;
   margin: auto;
