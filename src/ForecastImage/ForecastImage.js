@@ -21,7 +21,7 @@ const weatherIcons = {
  
 function ForecastImage(props) {
   return (
-    <img src={weatherIcons[props.icon]} alt={props.icon} className="forecast-img"/>
+    <img src={weatherIcons[props.icon]} alt={props.icon} className={props.classLabel}/>
   )
 }
 

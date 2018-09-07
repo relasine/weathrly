@@ -1,6 +1,6 @@
 import React from 'react';
 
-import WeatherImage from '../WeatherImage/WeatherImage';
+import ForecastImage from '../ForecastImage/ForecastImage';
 import './current.css';
 
 function Current(props) {
@@ -8,7 +8,8 @@ function Current(props) {
 	return (
 		<div className="current">
 			<aside className="weather-img-aside">
-				<WeatherImage icon={props.data.icon}/>
+				<ForecastImage icon={props.data.icon}
+											 classLabel="weather-img"/>
 				<h2 className="weather-description">{props.data.weather}</h2>
 			</aside>
 			<article>
