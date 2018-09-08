@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import SearchBar from '../SearchBar/SearchBar'
 import './welcome.css'
 
 export default class Welcome extends Component{
@@ -14,18 +14,7 @@ export default class Welcome extends Component{
   render(){
 
     return(
-      <form className="location-container">
-      <input onChange={(event)=>{
-        this.setState({
-          location: event.target.value
-        })
-      }} className="location-input" value={this.state.location} type='text' name="location-input" placeholder='City/Zip'></input>
-      <div onClick={(event)=>{
-        event.preventDefault();
-        this.props.setLocation(this.state.location);
-      }} className="magnifier-div"><img className="magnifier" src="./magnifier.svg"/></div>
-      </form>
-
+      <SearchBar setLocation={this.props.setLocation} inputClass="welcome-input" magnifierDivClass="welcome-magnifier-div" magnifierClass="welcome-magnifier"/>
     )
   }
 }

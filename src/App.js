@@ -51,7 +51,6 @@ class App extends Component {
       location: selectedLocation
     })
 
-    console.log(this.state);
   }
 
 

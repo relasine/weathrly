@@ -7,7 +7,7 @@
   column-gap: 22em;
 }
 
-.location-input{
+.welcome-input{
   grid-row: 1;
   border-style: none;
   background:rgba(0,0,0,0.5);
@@ -18,18 +18,18 @@
   color: #fff;
 }
 
-.location-input::placeholder{
+.welcome-input::placeholder{
   color: grey;
 }
 
-.magnifier{
+.welcome-magnifier{
   grid-row: 2;
   width: 43px;
   padding-top: .5rem;
 
 }
 
-.magnifier-div{
+.welcome-magnifier-div{
   padding: 0 8px;
   margin: auto;
   width: 50px;
