@@ -10,8 +10,7 @@ function Daily(props) {
   return (
     <section className="hourly-weather">
       <h3>{props.data.title}</h3>
-      <ForecastImage icon={props.data.icon}
-                      classLabel="forecast-img" />
+      <ForecastImage icon={props.data.icon} />
       <h3>{temp}°</h3>
     </section>
   )
