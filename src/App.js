@@ -20,6 +20,7 @@ class App extends Component {
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
+    this.setLocation = this.setLocation.bind(this);
   }
 
   toggleSevenHour() {
@@ -44,8 +45,17 @@ class App extends Component {
     //seven-hour-toggle - color grey, font-weight 300
   }
 
+  setLocation(selectedLocation){
+
+    this.setState({
+      location: selectedLocation
+    })
+  }
+
 
   render() {
+
+
 
     if(this.state.location){
 
@@ -69,7 +79,7 @@ class App extends Component {
     }else{
       return(
         <div className="App">
-        <Welcome />
+        <Welcome setLocation={this.setLocation}/>
         </div>
       )
     }

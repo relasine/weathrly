@@ -7,7 +7,7 @@ export default class Welcome extends Component{
     super();
 
     this.state = {
-
+      location: undefined
     }
   }
 
@@ -15,8 +15,12 @@ export default class Welcome extends Component{
 
     return(
       <form className="location-container">
-      <input className="location-input" type='text' name="location-input" placeholder='City/Zip'></input>
-      <div className="magnifier-div"><img className="magnifier" src="./magnifier.svg"/></div>
+      <input onChange={(event)=>{
+        this.setState({
+          location: event.target.value
+        })
+      }} className="location-input" value={this.state.location} type='text' name="location-input" placeholder='City/Zip'></input>
+      <div onClick={this.props.setLocation(this.state.location)} className="magnifier-div"><img className="magnifier" src="./magnifier.svg"/></div>
       </form>
 
     )
