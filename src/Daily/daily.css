@@ -1,0 +1,10 @@
+.daily-weather {
+  margin: 0 1rem;
+  color: #FFF;
+  text-align: center;
+  height: 204px;
+}
+
+.daily-forecast-img {
+  width: 60px;
+}
