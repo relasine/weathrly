@@ -1,0 +1,32 @@
+
+
+.location-container{
+  margin: auto;
+}
+
+.location-input{
+  border-style: none;
+  background:rgba(0,0,0,0.5);
+  font-size: 3rem;
+  max-width: 1000px;
+  min-width: 40rem;
+  height: 60px;
+  color: #fff;
+}
+
+.location-input::placeholder{
+  color: grey;
+}
+
+.magnifier{
+  width: 43px;
+}
+
+.magnifier-div{
+  display: grid;
+  align-items: center;
+  margin-left: 1rem;
+  background:rgba(0,0,0,0.5);
+  height: 62px;
+  display: inline-block;
+}
