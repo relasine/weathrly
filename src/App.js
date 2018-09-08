@@ -50,12 +50,12 @@ class App extends Component {
     this.setState({
       location: selectedLocation
     })
+
+    console.log(this.state);
   }
 
 
   render() {
-
-
 
     if(this.state.location){
 
@@ -83,7 +83,6 @@ class App extends Component {
         </div>
       )
     }
-
 
   }
 }
