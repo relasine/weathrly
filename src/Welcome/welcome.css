@@ -2,9 +2,13 @@
 
 .location-container{
   margin: auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  column-gap: 22em;
 }
 
 .location-input{
+  grid-row: 1;
   border-style: none;
   background:rgba(0,0,0,0.5);
   font-size: 3rem;
@@ -19,14 +23,20 @@
 }
 
 .magnifier{
+  grid-row: 2;
   width: 43px;
+  padding-top: .5rem;
+
 }
 
 .magnifier-div{
+  padding: 0 8px;
+  margin: auto;
+  width: 50px;
   display: grid;
   align-items: center;
   margin-left: 1rem;
   background:rgba(0,0,0,0.5);
-  height: 62px;
+  height: 60px;
   display: inline-block;
 }
