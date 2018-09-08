@@ -3,8 +3,9 @@ import './App.css';
 import Current from './current/Current';
 import SevenHour from './SevenHour/SevenHour';
 import { data } from './api';
-import TenDay from './TenDay/TenDay'
-import Toggle from './Toggle/Toggle'
+import TenDay from './TenDay/TenDay';
+import Toggle from './Toggle/Toggle';
+import Welcome from './Welcome/Welcome';
 
 class App extends Component {
   constructor(){
@@ -12,12 +13,14 @@ class App extends Component {
 
     this.state = {
       data: data,
+      location: undefined,
       sevenHourSelected: true,
       tenDaySelected: false
     }
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
+    this.setLocation = this.setLocation.bind(this);
   }
 
   toggleSevenHour() {
@@ -42,25 +45,45 @@ class App extends Component {
     //seven-hour-toggle - color grey, font-weight 300
   }
 
+  setLocation(selectedLocation){
+
+    this.setState({
+      location: selectedLocation
+    })
+
+    console.log(this.state);
+  }
+
 
   render() {
 
-    return (
-      <div className="App">
-        <Current data={ this.state.data.current_observation } />
-        <section className='bottom-section'>
-          <Toggle toggleSevenHour={ this.toggleSevenHour }
-                  toggleTenDay={ this.toggleTenDay }
-                  toggleStateSevenHour={ this.state.sevenHourSelected }
-                  toggleStateTenDay={ this.state.tenDaySelected }
-          />
-          <SevenHour  data={ this.state.data.hourly_forecast }
-                      toggleState={ this.state.sevenHourSelected } />
-          <TenDay data={this.state.data.forecast.txt_forecast.forecastday}
-                  toggleState={ this.state.tenDaySelected }/>
-        </section>
-      </div>
-    );
+    if(this.state.location){
+
+      return (
+        <div className="App">
+          <Current data={ this.state.data.current_observation } />
+          <section className='bottom-section'>
+            <Toggle toggleSevenHour={ this.toggleSevenHour }
+                    toggleTenDay={ this.toggleTenDay }
+                    toggleStateSevenHour={ this.state.sevenHourSelected }
+                    toggleStateTenDay={ this.state.tenDaySelected }
+            />
+            <SevenHour  data={ this.state.data.hourly_forecast }
+                        toggleState={ this.state.sevenHourSelected } />
+            <TenDay data={this.state.data.forecast.txt_forecast.forecastday}
+                    toggleState={ this.state.tenDaySelected }/>
+          </section>
+        </div>
+      );
+
+    }else{
+      return(
+        <div className="App">
+        <Welcome setLocation={this.setLocation}/>
+        </div>
+      )
+    }
+
   }
 }
 
