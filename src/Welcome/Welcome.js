@@ -14,7 +14,7 @@ export default class Welcome extends Component{
   render(){
 
     return(
-      <SearchBar inputClass="welcome-input" magnifierDivClass="welcome-magnifier-div" magnifierClass="welcome-magnifier"/>
+      <SearchBar setLocation={this.props.setLocation} inputClass="welcome-input" magnifierDivClass="welcome-magnifier-div" magnifierClass="welcome-magnifier"/>
     )
   }
 }

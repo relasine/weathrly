@@ -4,8 +4,8 @@ export default class SearchBar extends Component{
   constructor(){
     super();
 
-    this.setState = {
-      location: ""
+    this.state = {
+      location: undefined
     }
   }
 
