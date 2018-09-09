@@ -6,6 +6,7 @@ import { data } from './api';
 import TenDay from './TenDay/TenDay';
 import Toggle from './Toggle/Toggle';
 import Welcome from './Welcome/Welcome';
+import SearchBar from './SearchBar/SearchBar'
 
 class App extends Component {
   constructor(){
@@ -60,6 +61,9 @@ class App extends Component {
 
       return (
         <div className="App">
+          <section className="search-section">
+            <SearchBar setLocation={this.setLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
+          </section>
           <Current data={ this.state.data.current_observation } />
           <section className='bottom-section'>
             <Toggle toggleSevenHour={ this.toggleSevenHour }

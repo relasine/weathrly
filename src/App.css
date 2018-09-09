@@ -3,3 +3,47 @@
   display: grid;
   align-items: center;
 }
+
+.search-section {
+  display:flex;
+  margin-bottom: 1rem;
+}
+
+.main-input{
+  grid-row: 1;
+  border-style: none;
+  background: rgba(0,0,0,0.5);
+  font-size: 1rem;
+  max-width: 1000px;
+  min-width: 40rem;
+  height: 40px;
+  color: #fff;
+}
+
+.main-input::placeholder{
+  color: grey;
+  padding-left: 8px;
+}
+
+.main-magnifier{
+  grid-row: 2;
+  width: 20px;
+  padding-top: .5rem;
+}
+
+.main-magnifier-div{
+  padding: 0 8px;
+  margin: auto;
+  width: 30px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+  background:rgba(0,0,0,0.5);
+  height: 40px;
+  display: inline-block;
+}
+
+.main-magnifier-div:hover {
+  cursor: pointer;
+}

@@ -20,13 +20,13 @@
 
 .welcome-input::placeholder{
   color: grey;
+  padding-left: 8px;
 }
 
 .welcome-magnifier{
   grid-row: 2;
   width: 43px;
   padding-top: .5rem;
-
 }
 
 .welcome-magnifier-div{
@@ -39,4 +39,8 @@
   background:rgba(0,0,0,0.5);
   height: 60px;
   display: inline-block;
+}
+
+.welcome-magnifier-div:hover {
+  cursor: pointer;
 }
