@@ -5,13 +5,12 @@ import './daily.css';
 
 function Daily(props) {
 
-  const temp = parseInt(props.data.fcttext.match(/[0-9]+/)[0], 10);
 
   return (
     <section className="hourly-weather">
-      <h3>{props.data.title}</h3>
+      <h3>{props.data.date.weekday}</h3>
       <ForecastImage icon={props.data.icon} classLabel="forecast-img" />
-      <h3>{temp}°</h3>
+      <h3 className="daily-temps">{props.data.high.fahrenheit}° / {props.data.low.fahrenheit}°</h3>
     </section>
   )
 
