@@ -20,7 +20,7 @@ export default class SearchBar extends Component{
       <div onClick={(event)=>{
         event.preventDefault();
         if (this.state.location) {
-          this.props.setLocation(this.state.location);
+          this.props.cleanLocation(this.state.location);
         }
       }} className={this.props.magnifierDivClass}><img className={this.props.magnifierClass} src="./magnifier.svg" alt="search-button"/></div>
       </div>
