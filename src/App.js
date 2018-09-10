@@ -22,7 +22,9 @@ class App extends Component {
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
+    this.cleanLocation = this.cleanLocation.bind(this);
     this.setLocation = this.setLocation.bind(this);
+
   }
 
   toggleSevenHour() {
@@ -56,29 +58,33 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/CO/Denver.json`) 
+    if (this.state.location) {
+    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.location.stateLocation}/${this.state.location.cityLocation}.json`) 
       .then(response => response.json())
       .then(info => {
         this.setState({
           data: info
         });
-      // .catch(error => {
-      //   throw new Error(error);
       })
-    //.catch
+    }
+  }
+
+  cleanLocation(string) {
+    const csArray = string.split(' ');
+
+    let locationObject = {cityLocation: csArray[0].substr(0, csArray[0].length -1), stateLocation: csArray[1]};
+
+    this.setLocation(locationObject);
   }
 
 
   render() {
 
-    console.log(this.state.data)
-
     if(this.state.location){
-
       return (
         <div className="App">
           <section className="search-section">
-            <SearchBar setLocation={this.setLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
+            <SearchBar cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
           <Current  day={ this.state.data.forecast.txt_forecast.forecastday[0].title}
                     data={ this.state.data.current_observation }
@@ -100,11 +106,10 @@ class App extends Component {
     }else{
       return(
         <div className="App">
-        <Welcome setLocation={this.setLocation}/>
+        <Welcome cleanLocation={ this.cleanLocation }/>
         </div>
       )
     }
-
   }
 }
 
