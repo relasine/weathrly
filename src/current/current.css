@@ -2,14 +2,15 @@
 
 .current {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	width: 83%;
-  max-width: 40rem;
+  max-width: 32rem;
+  height: 20rem;
 	margin: auto;
   font-family: 'Open Sans', sans-serif;
   color: #C9C9C9;
   background:rgba(0,0,0,0.5);
-}
+}e
 
 article {
   margin-right: 2rem;
@@ -23,42 +24,41 @@ article {
 }
 
 .weather-img {
-  width: 300px;
+  width: 13rem;
 }
 
 .temperature {
-  font-size: 8rem;
-  margin: 0;
+  font-size: 6rem;
+  margin: 0 0 1rem 0;
   color: #FFF;
   font-weight: 300;
 }
 
+.current-weather-right-containter {
+  display: grid;
+  align-items: center;
+}
+
 .wind,
 .humidity,
-.visibility {
-  font-size: 1.5rem;
+.highlow {
+  font-size: 1.2rem;
   font-weight: 300;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .weather-label,
 .weather-description {
   color: #FFF;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 800;
 }
 
 .weather-description {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   text-align: center;
   font-weight: 300;
-  padding-bottom: 1rem;
-}
-
-.wind {
-  margin-top: 0;
-}
-
-.visibility {
   padding-bottom: 1rem;
 }
 
@@ -85,7 +85,7 @@ article {
   .temperature,
   .wind,
   .humidity,
-  .visibility {
+  .highlow {
     text-align: center;
   }
 
@@ -106,13 +106,13 @@ article {
   .weather-label,
   .wind,
   .humidity,
-  .visbility {
+  .highlow {
     font-size: 1.4rem;
   }
 
   .wind,
   .humidity,
-  .visibility {
+  .highlow {
     margin: 1rem 0; 
   }
 

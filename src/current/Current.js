@@ -12,12 +12,12 @@ function Current(props) {
 											 classLabel="weather-img"/>
 				<h2 className="weather-description">{props.data.weather}</h2>
 			</aside>
-			<article>
+			<article className="current-weather-right-container">
 
 				<h1 className="temperature">{props.data.temp_f}°</h1>
 				<h2 className="wind"><span className="weather-label wind-data">Wind - </span>{props.data.wind_dir} {props.data.wind_mph} mph</h2>
 				<h2 className="humidity"><span className="weather-label humidity-data">Humidity - </span> {props.data.relative_humidity}</h2>
-				<h2 className="visibility"><span className="weather-label visibility-data">Visibility - </span> {props.data.visibility_mi} mi</h2>
+				<h2 className="highlow"><span className="weather-label high-low">High/Low - </span> {props.forecastTemp.high.fahrenheit}°/{props.forecastTemp.low.fahrenheit}°</h2>
 			</article>
 		</div>
 	)

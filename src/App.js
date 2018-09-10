@@ -64,7 +64,8 @@ class App extends Component {
           <section className="search-section">
             <SearchBar setLocation={this.setLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
-          <Current data={ this.state.data.current_observation } />
+          <Current data={ this.state.data.current_observation }
+                   forecastTemp = { this.state.data.forecast.simpleforecast.forecastday[0]} />
           <section className='bottom-section'>
             <Toggle toggleSevenHour={ this.toggleSevenHour }
                     toggleTenDay={ this.toggleTenDay }
