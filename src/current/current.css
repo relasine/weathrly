@@ -4,7 +4,7 @@
 	display: flex;
 	justify-content: space-around;
 	width: 83%;
-  max-width: 32rem;
+  max-width: 36rem;
   height: 20rem;
 	margin: auto;
   font-family: 'Open Sans', sans-serif;
@@ -19,7 +19,7 @@
   text-align: center;
   color: #C9C9C9;
   background:rgba(0,0,0,0.5);
-  max-width: 32rem;
+  max-width: 36rem;
 }
 
 .day-label {
@@ -27,14 +27,14 @@
 }
 
 article {
-  margin-right: 2rem;
+  margin-right: 1rem;
   display: grid;
   align-items: center;
 }
 
 .weather-img-aside {
   padding-top: 2rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .weather-img {
