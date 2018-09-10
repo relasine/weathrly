@@ -30,6 +30,6 @@
 .seven-hour-toggle:hover,
 .ten-day-toggle:hover {
   cursor: pointer;
-  font-weight: 800;
+  /*text-shadow: 0 0 .65px #FFF, 0 0 .65px #FFF;*/
   color: #FFF;
 }

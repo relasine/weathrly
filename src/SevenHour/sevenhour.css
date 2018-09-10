@@ -3,6 +3,7 @@
   background:rgba(0,0,0,0.5);
   justify-content: space-between;
   margin: auto;
-  font-size: 1.2rem;
-  max-width: 70rem;
+  font-size: 1rem;
+  max-width: 50rem;
+  height: 11rem;
 }

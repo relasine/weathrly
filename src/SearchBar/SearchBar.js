@@ -11,7 +11,7 @@ export default class SearchBar extends Component{
 
   render(){
     return(
-      <form className="location-container">
+      <div className="location-container">
       <input onChange={(event)=>{
         this.setState({
           location: event.target.value
@@ -23,7 +23,7 @@ export default class SearchBar extends Component{
           this.props.setLocation(this.state.location);
         }
       }} className={this.props.magnifierDivClass}><img className={this.props.magnifierClass} src="./magnifier.svg" alt="search-button"/></div>
-      </form>
+      </div>
     )
   }
 }
