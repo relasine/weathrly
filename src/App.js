@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 import Current from './current/Current';
 import SevenHour from './SevenHour/SevenHour';
-import { data } from './api';
+// import { data } from './api';
 import TenDay from './TenDay/TenDay';
 import Toggle from './Toggle/Toggle';
 import Welcome from './Welcome/Welcome';
 import SearchBar from './SearchBar/SearchBar'
+import apikey from './apikey'
 
 class App extends Component {
   constructor(){
     super();
 
     this.state = {
-      data: data,
+      data: undefined,
       location: undefined,
       sevenHourSelected: true,
       tenDaySelected: false
@@ -54,8 +55,23 @@ class App extends Component {
 
   }
 
+  componentDidMount() {
+    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/CO/Denver.json`) 
+      .then(response => response.json())
+      .then(info => {
+        this.setState({
+          data: info
+        });
+      // .catch(error => {
+      //   throw new Error(error);
+      })
+    //.catch
+  }
+
 
   render() {
+
+    console.log(this.state.data)
 
     if(this.state.location){
 
@@ -64,8 +80,9 @@ class App extends Component {
           <section className="search-section">
             <SearchBar setLocation={this.setLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
-          <Current data={ this.state.data.current_observation }
-                   forecastTemp = { this.state.data.forecast.simpleforecast.forecastday[0]} />
+          <Current  day={ this.state.data.forecast.txt_forecast.forecastday[0].title}
+                    data={ this.state.data.current_observation }
+                    forecastTemp = { this.state.data.forecast.simpleforecast.forecastday[0]} />
           <section className='bottom-section'>
             <Toggle toggleSevenHour={ this.toggleSevenHour }
                     toggleTenDay={ this.toggleTenDay }
@@ -74,7 +91,7 @@ class App extends Component {
             />
             <SevenHour  data={ this.state.data.hourly_forecast }
                         toggleState={ this.state.sevenHourSelected } />
-            <TenDay data={this.state.data.forecast.txt_forecast.forecastday}
+            <TenDay data={this.state.data.forecast.simpleforecast.forecastday}
                     toggleState={ this.state.tenDaySelected }/>
           </section>
         </div>

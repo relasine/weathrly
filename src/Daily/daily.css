@@ -8,3 +8,7 @@
 .daily-forecast-img {
   width: 60px;
 }
+
+.daily-temps {
+  font-size: 1rem;
+}
