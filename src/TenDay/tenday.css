@@ -1,8 +1,17 @@
 .ten-day {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  /*justify-content: space-around;*/
   max-width: 70rem;
   height: 11rem;
   margin: auto;
   background:rgba(0,0,0,0.5);
+}
+
+@media (max-width: 1150px) {
+  .ten-day {
+    height: 22rem;
+    max-width: 700px;
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
