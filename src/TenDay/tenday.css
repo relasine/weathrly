@@ -5,7 +5,7 @@
   max-width: 70rem;
   height: 11rem;
   margin: auto;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.2);
 }
 
 @media (max-width: 1150px) {
