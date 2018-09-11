@@ -15,7 +15,8 @@ class App extends Component {
 
     this.state = {
       data: undefined,
-      location: undefined,
+      cityLocation: undefined,
+      stateLocation: undefined,
       sevenHourSelected: true,
       tenDaySelected: false
     }
@@ -23,64 +24,82 @@ class App extends Component {
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
     this.cleanLocation = this.cleanLocation.bind(this);
-    this.setLocation = this.setLocation.bind(this);
+    // this.setLocation = this.setLocation.bind(this);
+    this.fetchCall = this.fetchCall.bind(this);
 
   }
 
   toggleSevenHour() {
-    console.log("seven hour")
     this.setState({
       sevenHourSelected: true,
       tenDaySelected: false
     });
-    //Display flex on SevenHour, display none on tenday
-    //seven-hour-toggle - colorwhite, font-weight 800
-    //ten-day-toggle - color grey, font-weight 300
   }
 
   toggleTenDay() {
-    console.log('ten day')
     this.setState({
       sevenHourSelected: false,
       tenDaySelected: true
     });
-    //Display flex on tenDay, display none on sevenHour
-    //ten-day-toggle - colorwhite, font-weight 800
-    //seven-hour-toggle - color grey, font-weight 300
   }
 
-  setLocation(selectedLocation){
+  // setLocation(city, state) {
+  //   this.setState({
+  //     cityLocation: city,
+  //     stateLocation: state
+  //   });
 
-    this.setState({
-      location: selectedLocation
-    })
+  //   this.fetchCall();
+  // }
+
+  fetchCall() {
+          console.log('fetching...', this.state)
+
+    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`) 
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          data: data
+        })
+      })
 
   }
 
   componentDidMount() {
-    if (this.state.location) {
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.location.stateLocation}/${this.state.location.cityLocation}.json`) 
-      .then(response => response.json())
-      .then(info => {
-        this.setState({
-          data: info
-        });
-      })
+    console.log('componentDidMount')
+    if (this.state.cityLocation) {
+      // console.log('component did mount fetch')
+      // this.fetchCall()
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.state.data) {
+      this.fetchCall();
     }
   }
 
   cleanLocation(string) {
     const csArray = string.split(' ');
 
-    let locationObject = {cityLocation: csArray[0].substr(0, csArray[0].length -1), stateLocation: csArray[1]};
+    let cityLocation = csArray[0].substr(0, csArray[0].length -1)
+    let stateLocation = csArray[1];
 
-    this.setLocation(locationObject);
+    this.setState({
+      cityLocation: csArray[0].substr(0, csArray[0].length -1), 
+      stateLocation: csArray[1]
+    });
+    
   }
 
 
   render() {
 
-    if(this.state.location){
+
+    // console.log(this.state)
+
+
+    if(this.state.data){
       return (
         <div className="App">
           <section className="search-section">
