@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 import Current from './current/Current';
 import SevenHour from './SevenHour/SevenHour';
-// import { data } from './api';
 import TenDay from './TenDay/TenDay';
 import Toggle from './Toggle/Toggle';
 import Welcome from './Welcome/Welcome';
-import SearchBar from './SearchBar/SearchBar'
-import apikey from './apikey'
+import SearchBar from './SearchBar/SearchBar';
+import apikey from './apikey';
+import Trie from '@relasine/auto-complete';
+// const { Trie } = require('@relasine/auto-complete');
+
+const trie = new Trie();
+trie.insert('denver')
+console.log(trie)
 
 class App extends Component {
   constructor(){
@@ -47,7 +52,7 @@ class App extends Component {
 
   fetchCall() {
     console.log('fetching')
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`) 
+    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -80,8 +85,8 @@ class App extends Component {
     const csArray = string.split(' ');
 
     this.setState({
-      cityLocation: csArray[0].substr(0, csArray[0].length -1), 
-      stateLocation: csArray[1], 
+      cityLocation: csArray[0].substr(0, csArray[0].length -1),
+      stateLocation: csArray[1],
       current: false
     });
 
