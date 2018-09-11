@@ -10,15 +10,6 @@ import apikey from './apikey';
 import Trie from '@relasine/auto-complete';
 import cities from './cities'
 
-const trie = new Trie();
-
-trie.populate(cities.data)
-
-let suggestion = trie.suggest('den');
-
-console.log(suggestion)
-
-
 class App extends Component {
   constructor(){
     super();
@@ -30,13 +21,13 @@ class App extends Component {
       stateLocation: undefined,
       sevenHourSelected: true,
       tenDaySelected: false,
-      current: true
+      current: true,
+      trie: new Trie()
     }
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
     this.cleanLocation = this.cleanLocation.bind(this);
-    // this.setLocation = this.setLocation.bind(this);
     this.fetchCall = this.fetchCall.bind(this);
 
   }
@@ -75,9 +66,12 @@ class App extends Component {
     if (currentLocation) {
       this.setState({
         cityLocation: currentLocation.city,
-        stateLocation: currentLocation.state
+        stateLocation: currentLocation.state,
+        // trie: new Trie()
       })
     }
+
+    this.state.trie.populate(cities.data);
   }
 
   componentDidUpdate() {
@@ -108,12 +102,11 @@ class App extends Component {
       this.setStorage(this.state.cityLocation, this.state.stateLocation)
     }
 
-
     if(this.state.data){
       return (
         <div className="App">
           <section className="search-section">
-            <SearchBar cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
+            <SearchBar trie={this.state.trie} cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
           <Current  day={ this.state.data.forecast.txt_forecast.forecastday[0].title}
                     data={ this.state.data.current_observation }

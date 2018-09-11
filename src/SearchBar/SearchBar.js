@@ -12,12 +12,14 @@ export default class SearchBar extends Component{
 
   render(){
 
+
     return(
       <div className="location-container">
       <input onChange={(event)=>{
-        this.setState({
-          location: event.target.value
-        })
+        console.log(this.props.trie.suggest(event.target.value))
+        // this.setState({
+        //   location: event.target.value
+        // })
       }} className={this.props.inputClass} value={this.state.location} type='text' name="location-input" placeholder='City/Zip'></input>
       <div onClick={(event)=>{
         event.preventDefault();
