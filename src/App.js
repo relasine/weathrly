@@ -8,11 +8,16 @@ import Welcome from './Welcome/Welcome';
 import SearchBar from './SearchBar/SearchBar';
 import apikey from './apikey';
 import Trie from '@relasine/auto-complete';
-// const { Trie } = require('@relasine/auto-complete');
+import cities from './cities'
 
 const trie = new Trie();
-trie.insert('denver')
-console.log(trie)
+
+trie.populate(cities.data)
+
+let suggestion = trie.suggest('den');
+
+console.log(suggestion)
+
 
 class App extends Component {
   constructor(){
