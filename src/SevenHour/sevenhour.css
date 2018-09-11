@@ -1,6 +1,6 @@
 .seven-hour {
   display: flex;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.2);
   justify-content: space-between;
   margin: auto;
   font-size: 1rem;
