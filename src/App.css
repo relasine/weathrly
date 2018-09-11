@@ -1,7 +1,25 @@
 .App {
   height: 100vh;
   display: grid;
-  align-items: center;
+}
+
+.logo-section {
+  width: 30rem;
+  margin: 3rem auto;
+  display: flex;
+  align-self: end;
+}
+
+.logo-img {
+  width: 15rem;
+  height: 10rem;
+}
+
+.logo-label {
+  color: #FFF;
+  height: 10rem;
+  padding-top: 1.5rem;
+  font-size: 2.5rem;
 }
 
 .search-section {

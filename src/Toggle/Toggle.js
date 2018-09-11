@@ -11,7 +11,6 @@ export default class Toggle extends Component {
   }
 
   render() {
-    console.log(this.props)
 
     if (this.props.toggleStateSevenHour) {
     return (

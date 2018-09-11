@@ -15,10 +15,12 @@ class App extends Component {
 
     this.state = {
       data: undefined,
+      location: undefined,
       cityLocation: undefined,
       stateLocation: undefined,
       sevenHourSelected: true,
-      tenDaySelected: false
+      tenDaySelected: false,
+      current: true
     }
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
@@ -43,38 +45,33 @@ class App extends Component {
     });
   }
 
-  // setLocation(city, state) {
-  //   this.setState({
-  //     cityLocation: city,
-  //     stateLocation: state
-  //   });
-
-  //   this.fetchCall();
-  // }
-
   fetchCall() {
-          console.log('fetching...', this.state)
-
+    console.log('fetching')
     fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`) 
       .then(response => response.json())
       .then(data => {
         this.setState({
+          current: true,
           data: data
         })
       })
+      .catch(error => {
+      });
 
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
-    if (this.state.cityLocation) {
-      // console.log('component did mount fetch')
-      // this.fetchCall()
+    let currentLocation = JSON.parse(localStorage.getItem('storedLocation')) || undefined;
+    if (currentLocation) {
+      this.setState({
+        cityLocation: currentLocation.city,
+        stateLocation: currentLocation.state
+      })
     }
   }
 
   componentDidUpdate() {
-    if (!this.state.data) {
+    if (!this.state.data || !this.state.current) {
       this.fetchCall();
     }
   }
@@ -82,21 +79,24 @@ class App extends Component {
   cleanLocation(string) {
     const csArray = string.split(' ');
 
-    let cityLocation = csArray[0].substr(0, csArray[0].length -1)
-    let stateLocation = csArray[1];
-
     this.setState({
       cityLocation: csArray[0].substr(0, csArray[0].length -1), 
-      stateLocation: csArray[1]
+      stateLocation: csArray[1], 
+      current: false
     });
-    
+
   }
 
+  setStorage(city, state) {
+    let locationObj = {city: city, state: state}
+    localStorage.setItem('storedLocation', JSON.stringify(locationObj))
+  }
 
   render() {
 
-
-    // console.log(this.state)
+    if(this.state.cityLocation) {
+      this.setStorage(this.state.cityLocation, this.state.stateLocation)
+    }
 
 
     if(this.state.data){
@@ -125,7 +125,10 @@ class App extends Component {
     }else{
       return(
         <div className="App">
-        <Welcome cleanLocation={ this.cleanLocation }/>
+          <section className='logo-section'>
+            <h1 className="logo-label">WThRly</h1><img className='logo-img' src="./windy.svg" alt='logo' />
+          </section>
+          <Welcome cleanLocation={ this.cleanLocation }/>
         </div>
       )
     }
