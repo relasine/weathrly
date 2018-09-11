@@ -9,7 +9,9 @@ export default class SearchBar extends Component{
     }
   }
 
+
   render(){
+
     return(
       <div className="location-container">
       <input onChange={(event)=>{

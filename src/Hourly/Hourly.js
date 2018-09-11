@@ -11,7 +11,7 @@ function Hourly(props) {
       <h3>{props.data.FCTTIME.civil}</h3>
       <ForecastImage  icon={props.data.icon}
                       classLabel="daily-forecast-img" />
-      <h3>{props.data.temp.english}°</h3>
+      <h3>{Math.floor(props.data.temp.english)}°</h3>
     </section>
   )
 

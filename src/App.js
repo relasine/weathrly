@@ -16,71 +16,90 @@ class App extends Component {
     this.state = {
       data: undefined,
       location: undefined,
+      cityLocation: undefined,
+      stateLocation: undefined,
       sevenHourSelected: true,
-      tenDaySelected: false
+      tenDaySelected: false,
+      current: true
     }
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
     this.cleanLocation = this.cleanLocation.bind(this);
-    this.setLocation = this.setLocation.bind(this);
+    // this.setLocation = this.setLocation.bind(this);
+    this.fetchCall = this.fetchCall.bind(this);
 
   }
 
   toggleSevenHour() {
-    console.log("seven hour")
     this.setState({
       sevenHourSelected: true,
       tenDaySelected: false
     });
-    //Display flex on SevenHour, display none on tenday
-    //seven-hour-toggle - colorwhite, font-weight 800
-    //ten-day-toggle - color grey, font-weight 300
   }
 
   toggleTenDay() {
-    console.log('ten day')
     this.setState({
       sevenHourSelected: false,
       tenDaySelected: true
     });
-    //Display flex on tenDay, display none on sevenHour
-    //ten-day-toggle - colorwhite, font-weight 800
-    //seven-hour-toggle - color grey, font-weight 300
   }
 
-  setLocation(selectedLocation){
-
-    this.setState({
-      location: selectedLocation
-    })
+  fetchCall() {
+    console.log('fetching')
+    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`) 
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          current: true,
+          data: data
+        })
+      })
+      .catch(error => {
+      });
 
   }
 
   componentDidMount() {
-    if (this.state.location) {
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.location.stateLocation}/${this.state.location.cityLocation}.json`) 
-      .then(response => response.json())
-      .then(info => {
-        this.setState({
-          data: info
-        });
+    let currentLocation = JSON.parse(localStorage.getItem('storedLocation')) || undefined;
+    if (currentLocation) {
+      this.setState({
+        cityLocation: currentLocation.city,
+        stateLocation: currentLocation.state
       })
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.state.data || !this.state.current) {
+      this.fetchCall();
     }
   }
 
   cleanLocation(string) {
     const csArray = string.split(' ');
 
-    let locationObject = {cityLocation: csArray[0].substr(0, csArray[0].length -1), stateLocation: csArray[1]};
+    this.setState({
+      cityLocation: csArray[0].substr(0, csArray[0].length -1), 
+      stateLocation: csArray[1], 
+      current: false
+    });
 
-    this.setLocation(locationObject);
   }
 
+  setStorage(city, state) {
+    let locationObj = {city: city, state: state}
+    localStorage.setItem('storedLocation', JSON.stringify(locationObj))
+  }
 
   render() {
 
-    if(this.state.location){
+    if(this.state.cityLocation) {
+      this.setStorage(this.state.cityLocation, this.state.stateLocation)
+    }
+
+
+    if(this.state.data){
       return (
         <div className="App">
           <section className="search-section">
@@ -106,7 +125,10 @@ class App extends Component {
     }else{
       return(
         <div className="App">
-        <Welcome cleanLocation={ this.cleanLocation }/>
+          <section className='logo-section'>
+            <h1 className="logo-label">WThRly</h1><img className='logo-img' src="./windy.svg" alt='logo' />
+          </section>
+          <Welcome cleanLocation={ this.cleanLocation }/>
         </div>
       )
     }

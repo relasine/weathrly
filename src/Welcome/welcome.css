@@ -1,7 +1,8 @@
 
 
 .location-container{
-  margin: auto;
+  align-items: start;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 300px 1fr;
   column-gap: 22em;
@@ -31,7 +32,7 @@
 
 .welcome-magnifier-div{
   padding: 0 8px;
-  margin: auto;
+  margin: 0 auto;
   width: 50px;
   display: grid;
   align-items: center;
