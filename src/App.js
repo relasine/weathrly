@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import Current from './current/Current';
 import SevenHour from './SevenHour/SevenHour';
-// import { data } from './api';
 import TenDay from './TenDay/TenDay';
 import Toggle from './Toggle/Toggle';
 import Welcome from './Welcome/Welcome';
-import SearchBar from './SearchBar/SearchBar'
-import apikey from './apikey'
+import SearchBar from './SearchBar/SearchBar';
+import apikey from './apikey';
+import Trie from '@relasine/auto-complete';
+import cities from './cities'
 
 class App extends Component {
   constructor(){
@@ -20,13 +21,13 @@ class App extends Component {
       stateLocation: undefined,
       sevenHourSelected: true,
       tenDaySelected: false,
-      current: true
+      current: true,
+      trie: new Trie()
     }
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
     this.cleanLocation = this.cleanLocation.bind(this);
-    // this.setLocation = this.setLocation.bind(this);
     this.fetchCall = this.fetchCall.bind(this);
 
   }
@@ -47,7 +48,7 @@ class App extends Component {
 
   fetchCall() {
     console.log('fetching')
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`) 
+    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -65,9 +66,12 @@ class App extends Component {
     if (currentLocation) {
       this.setState({
         cityLocation: currentLocation.city,
-        stateLocation: currentLocation.state
+        stateLocation: currentLocation.state,
+        // trie: new Trie()
       })
     }
+
+    this.state.trie.populate(cities.data);
   }
 
   componentDidUpdate() {
@@ -80,8 +84,8 @@ class App extends Component {
     const csArray = string.split(' ');
 
     this.setState({
-      cityLocation: csArray[0].substr(0, csArray[0].length -1), 
-      stateLocation: csArray[1], 
+      cityLocation: csArray[0].substr(0, csArray[0].length -1),
+      stateLocation: csArray[1],
       current: false
     });
 
@@ -98,12 +102,11 @@ class App extends Component {
       this.setStorage(this.state.cityLocation, this.state.stateLocation)
     }
 
-
     if(this.state.data){
       return (
         <div className="App">
           <section className="search-section">
-            <SearchBar cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
+            <SearchBar trie={this.state.trie} cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
           <Current  day={ this.state.data.forecast.txt_forecast.forecastday[0].title}
                     data={ this.state.data.current_observation }
