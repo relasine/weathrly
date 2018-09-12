@@ -9,6 +9,22 @@ export default class SearchBar extends Component{
       location: undefined,
       cityArray: []
     }
+
+    this.onInput = this.onInput.bind(this);
+
+  }
+
+  onInput() {
+    // var location = this.state.location
+    // for (var i = 0; i < this.state.cityArray.length; i++) {
+    //           console.log(this.state.cityArray[i], location)
+
+    //   if (this.state.cityArray[i].value === location) {
+    //     console.log('firing!')
+    //     this.props.cleanLocation(location);
+    //   }
+    // }
+
   }
 
 
@@ -17,22 +33,24 @@ export default class SearchBar extends Component{
 
     return(
       <div className="location-container">
-      <input onChange={(event)=>{
-        console.log(this.props.trie.suggest(event.target.value))
-        this.setState({
-          cityArray: this.props.trie.suggest(event.target.value)
-        })
+      <input list="cityList" onChange={(event)=>{
+        if (this.props.trie.suggest) {
+          this.setState({
+            cityArray: this.props.trie.suggest(event.target.value),
+            location: event.target.value
+          })
+        }
       }} className={this.props.inputClass} value={this.state.location} type='text' name="location-input" placeholder='City/Zip'></input>
 
-      <select className='city-select'>
+      <datalist id='cityList' className='city-select'>
 
         {this.state.cityArray.length &&
           this.state.cityArray.map(city=>{
-            return <CityOption city={city}/>
+            return <CityOption city={city} cleanLocation={this.props.cleanLocation}/>
           })
         }
 
-      </select>
+      </datalist>
 
       <div onClick={(event)=>{
         event.preventDefault();
