@@ -30,12 +30,17 @@
 .main-input{
   grid-row: 1;
   border-style: none;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.2);
   font-size: 1rem;
   max-width: 1000px;
   min-width: 40rem;
   height: 40px;
   color: #fff;
+}
+
+.main-input::list {
+  background: rgba(0,0,0,0.2);
+  color: #FFF;
 }
 
 .main-input::placeholder{
@@ -57,7 +62,7 @@
   align-items: center;
   justify-content: center;
   margin-left: 1rem;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.2);
   height: 40px;
   display: inline-block;
 }

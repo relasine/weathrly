@@ -10,26 +10,9 @@ export default class SearchBar extends Component{
       cityArray: []
     }
 
-    this.onInput = this.onInput.bind(this);
-
   }
-
-  onInput() {
-    // var location = this.state.location
-    // for (var i = 0; i < this.state.cityArray.length; i++) {
-    //           console.log(this.state.cityArray[i], location)
-
-    //   if (this.state.cityArray[i].value === location) {
-    //     console.log('firing!')
-    //     this.props.cleanLocation(location);
-    //   }
-    // }
-
-  }
-
 
   render(){
-
 
     return(
       <div className="location-container">
@@ -39,6 +22,7 @@ export default class SearchBar extends Component{
             cityArray: this.props.trie.suggest(event.target.value),
             location: event.target.value
           })
+          console.log(this.state)
         }
       }} className={this.props.inputClass} value={this.state.location} type='text' name="location-input" placeholder='City/Zip'></input>
 
@@ -54,7 +38,7 @@ export default class SearchBar extends Component{
 
       <div onClick={(event)=>{
         event.preventDefault();
-        if (this.state.location) {
+        if (this.state.location === this.state.cityArray[0]) {
           this.props.cleanLocation(this.state.location);
         }
       }} className={this.props.magnifierDivClass}><img className={this.props.magnifierClass} src="./magnifier.svg" alt="search-button"/></div>
