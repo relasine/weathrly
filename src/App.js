@@ -47,6 +47,8 @@ class App extends Component {
   }
 
   fetchCall() {
+
+    if (this.state.cityLocation) { 
     console.log('fetching')
     fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
       .then(response => response.json())
@@ -58,6 +60,9 @@ class App extends Component {
       })
       .catch(error => {
       });
+    } else {
+      console.log('no fetch')
+    }
 
   }
 
@@ -71,6 +76,7 @@ class App extends Component {
       })
     }
 
+    console.log('cdm')
     this.state.trie.populate(cities.data);
   }
 
@@ -131,7 +137,7 @@ class App extends Component {
           <section className='logo-section'>
             <h1 className="logo-label">WThRly</h1><img className='logo-img' src="./windy.svg" alt='logo' />
           </section>
-          <Welcome cleanLocation={ this.cleanLocation }/>
+          <Welcome cleanLocation={ this.cleanLocation } trie={this.state.trie}/>
         </div>
       )
     }

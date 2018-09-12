@@ -4,7 +4,7 @@ import React from 'react';
 
 function CityOption(props){
   return (
-    <option className='city-name'>{props.city}</option>
+    <option className='city-name' value={props.city}>{props.city}</option>
   )
 }
 
