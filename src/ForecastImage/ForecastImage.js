@@ -16,7 +16,11 @@ const weatherIcons = {
   snow: './snowy.svg',
   nt_snow: './snowy.svg',
   chancesnow: './snowy.svg',
-  nt_chancesnow: './snowy.svg'
+  nt_chancesnow: './snowy.svg',
+  chancetstorms: './t-storm.svg',
+  haze: './cloud.svg',
+  fog: './cloud.svg',
+  tstorms: './t-storm.svg'
   };
  
 function ForecastImage(props) {

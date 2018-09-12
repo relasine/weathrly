@@ -30,7 +30,7 @@ export default class SearchBar extends Component{
 
         {this.state.cityArray.length &&
           this.state.cityArray.map(city=>{
-            return <CityOption city={city} cleanLocation={this.props.cleanLocation}/>
+            return <CityOption key={city} city={city} cleanLocation={this.props.cleanLocation}/>
           })
         }
 

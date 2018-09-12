@@ -9,7 +9,11 @@ function TenDay(props) {
     return (
       <article className='ten-day'>
         {props.data.map((day) => {
-          return <Daily  data={day}
+          return <Daily   weekday={day.date.weekday}
+                          data={day}
+                          icon={day.icon}
+                          highTemp={day.high.fahrenheit}
+                          lowTemp={day.low.fahrenheit}
                           key={day.period} />
         })}
       </article>
