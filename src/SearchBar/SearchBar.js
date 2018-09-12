@@ -29,7 +29,6 @@ export default class SearchBar extends Component{
         {this.state.cityArray.length &&
           this.state.cityArray.map(city=>{
             return <CityOption city={city}/>
-
           })
         }
 
