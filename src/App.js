@@ -87,11 +87,13 @@ class App extends Component {
   }
 
   cleanLocation(string) {
-    const csArray = string.split(' ');
+    let csArray = string.split(' ');
+
+    let stateLocation = csArray.pop();
 
     this.setState({
-      cityLocation: csArray[0].substr(0, csArray[0].length -1),
-      stateLocation: csArray[1],
+      cityLocation: csArray.join('_'),
+      stateLocation: stateLocation,
       current: false
     });
 
