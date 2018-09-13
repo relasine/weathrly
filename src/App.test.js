@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { shallow } from 'enzyme';
 import { data } from './fakeapi';
+import { apikey } from './apikey';
 
 
 it('renders without crashing', () => {
@@ -23,7 +24,7 @@ describe('SearchBar', ()=>{
     });
   });
 
-  it.skip('should exist', () => {
+  it('should exist', () => {
     expect(wrapper).toBeDefined();
   });
 
@@ -49,5 +50,16 @@ describe('SearchBar', ()=>{
     expect(wrapper.state().location).toEqual('Chica');
     expect(wrapper.state().cityLocation).toEqual(['Chicago, IL']);
   });
+
+  it.skip('should make an api call and receive a response', () => {
+    
+    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/CO/Denver.json`)
+        .then(response => response.json())
+        .then(data => { })
+        .catch(error => {
+        });
+
+    expect(data.current_observation.image.title).toEqual('Weather Underground');
+  })
   
 });

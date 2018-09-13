@@ -12,7 +12,7 @@ describe('SearchBar', ()=>{
     wrapper = shallow(<SearchBar cleanLocation={() => {}} trie={{hi: "I'm a tree"}} magnifierClass={'mag-class'}/>)
   });
 
-  it.skip('should exist', () => {
+  it('should exist', () => {
     expect(wrapper).toBeDefined();
   });
 
