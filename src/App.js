@@ -49,7 +49,6 @@ class App extends Component {
   fetchCall() {
 
     if (this.state.cityLocation) { 
-    console.log('fetching')
     fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
       .then(response => response.json())
       .then(data => {
@@ -61,7 +60,6 @@ class App extends Component {
       .catch(error => {
       });
     } else {
-      console.log('no fetch')
     }
 
   }
@@ -83,7 +81,6 @@ class App extends Component {
       })
     }
 
-    console.log('cdm')
     this.state.trie.populate(cities.data);
   }
 

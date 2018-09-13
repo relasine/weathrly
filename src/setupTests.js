@@ -20,13 +20,3 @@ class LocalStorage {
 
 global.localStorage = new LocalStorage;
 
-global.fetch = () => {
-  const promise = {
-    then() {
-      return promise;
-    },
-    catch() {}
-  }
-  return promise
-}
-
