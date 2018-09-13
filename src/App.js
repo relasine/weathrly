@@ -8,10 +8,10 @@ import Welcome from './Welcome/Welcome';
 import SearchBar from './SearchBar/SearchBar';
 import apikey from './apikey';
 import Trie from '@relasine/auto-complete';
-import cities from './cities'
+import cities from './cities';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
@@ -23,7 +23,7 @@ class App extends Component {
       tenDaySelected: false,
       current: true,
       trie: new Trie()
-    }
+    };
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
@@ -49,17 +49,17 @@ class App extends Component {
   fetchCall() {
 
     if (this.state.cityLocation) { 
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          current: true,
-          data: data
+      fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            current: true,
+            data: data
+          });
         })
-      })
-      .catch(error => {
-      });
-    } else {
+        .catch(error => {
+        
+        });
     }
 
   }
@@ -70,7 +70,7 @@ class App extends Component {
     let parsedLocation;
 
     if (currentLocation) {
-      parsedLocation = JSON.parse(currentLocation)
+      parsedLocation = JSON.parse(currentLocation);
     }
 
     if (parsedLocation) {
@@ -78,7 +78,7 @@ class App extends Component {
         cityLocation: currentLocation.city,
         stateLocation: currentLocation.state,
         // trie: new Trie()
-      })
+      });
     }
 
     this.state.trie.populate(cities.data);
@@ -104,48 +104,49 @@ class App extends Component {
   }
 
   setStorage(city, state) {
-    let locationObj = {city: city, state: state}
-    localStorage.setItem('storedLocation', JSON.stringify(locationObj))
+    let locationObj = {city: city, state: state};
+
+    localStorage.setItem('storedLocation', JSON.stringify(locationObj));
   }
 
   render() {
 
-    if(this.state.cityLocation) {
-      this.setStorage(this.state.cityLocation, this.state.stateLocation)
+    if (this.state.cityLocation) {
+      this.setStorage(this.state.cityLocation, this.state.stateLocation);
     }
 
-    if(this.state.data){
+    if (this.state.data) {
       return (
         <div className="App">
           <section className="search-section">
             <SearchBar trie={this.state.trie} cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
           <Current  day={ this.state.data.forecast.txt_forecast.forecastday[0].title}
-                    data={ this.state.data.current_observation }
-                    forecastTemp = { this.state.data.forecast.simpleforecast.forecastday[0]} />
+            data={ this.state.data.current_observation }
+            forecastTemp = { this.state.data.forecast.simpleforecast.forecastday[0]} />
           <section className='bottom-section'>
             <Toggle toggleSevenHour={ this.toggleSevenHour }
-                    toggleTenDay={ this.toggleTenDay }
-                    toggleStateSevenHour={ this.state.sevenHourSelected }
-                    toggleStateTenDay={ this.state.tenDaySelected }
+              toggleTenDay={ this.toggleTenDay }
+              toggleStateSevenHour={ this.state.sevenHourSelected }
+              toggleStateTenDay={ this.state.tenDaySelected }
             />
             <SevenHour  data={ this.state.data.hourly_forecast }
-                        toggleState={ this.state.sevenHourSelected } />
+              toggleState={ this.state.sevenHourSelected } />
             <TenDay data={this.state.data.forecast.simpleforecast.forecastday}
-                    toggleState={ this.state.tenDaySelected }/>
+              toggleState={ this.state.tenDaySelected }/>
           </section>
         </div>
       );
 
-    }else{
-      return(
+    } else {
+      return (
         <div className="App">
           <section className='logo-section'>
             <h1 className="logo-label">WThRly</h1><img className='logo-img' src="./windy.svg" alt='logo' />
           </section>
           <Welcome cleanLocation={ this.cleanLocation } trie={this.state.trie}/>
         </div>
-      )
+      );
     }
   }
 }

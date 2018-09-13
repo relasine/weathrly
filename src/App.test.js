@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { data } from './fakeapi';
 
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
@@ -16,10 +17,10 @@ describe('SearchBar', ()=>{
   let wrapper; 
 
   beforeEach(()=>{
-    wrapper = shallow(<App />)
+    wrapper = shallow(<App />);
     wrapper.setState({ 
       data: data
-    })
+    });
   });
 
   it.skip('should exist', () => {
@@ -32,7 +33,7 @@ describe('SearchBar', ()=>{
   });
 
   it('should render content to the DOM if it has does not have data', () => {
-    wrapper.setState({ data: undefined })
+    wrapper.setState({ data: undefined });
     expect(wrapper.find('section').length).toBe(1);
   });
 
@@ -43,11 +44,10 @@ describe('SearchBar', ()=>{
 
   it('should have multiple state properties', () => {
     wrapper.setState({ location: 'Chica' });
-    wrapper.setState({ cityLocation: ['Chicago, IL']})
+    wrapper.setState({ cityLocation: ['Chicago, IL']});
 
     expect(wrapper.state().location).toEqual('Chica');
     expect(wrapper.state().cityLocation).toEqual(['Chicago, IL']);
   });
   
-
-})
+});
