@@ -14,7 +14,7 @@ describe('SearchBar', ()=>{
     wrapper = shallow(<SearchBar cleanLocation={() => {}} />)
   });
 
-  it('should exist', () => {
+  it.skip('should exist', () => {
     expect(wrapper).toBeDefined();
   });
 

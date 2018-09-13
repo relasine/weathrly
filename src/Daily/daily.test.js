@@ -1,21 +1,26 @@
 import React from 'react';
 import Daily from './Daily'
 import { mount, shallow } from 'enzyme';
-
-// import App from '/App.js';
+import { data } from '../fakeapi';
 
 
 describe('Daily', ()=>{
 
   let wrapper;
 
+  let dayData = data.forecast.simpleforecast.forecastday[0];
+
   beforeEach(()=>{
     let props = {
-      data: 'date',
-      date: 'weekday',
-      weekday: ''
+      data: dayData,
+      weekday: dayData.date.weekday,
+      icon: dayData.icon,
+      highTemp: dayData.high.fahrenheit,
+      lowTemp: dayData.low.fahrenheit,
+      key: dayData.period
+
     }
-    wrapper = shallow(<Daily {...props} />)
+    wrapper = shallow(<Daily data={props.data} weekday={props.weekday} icon={props.icon} highTemp={props.highTemp} lowTemp={props.lowTemp} />)
   });
 
   it('should exist', () => {
@@ -28,9 +33,9 @@ describe('Daily', ()=>{
 
   });
 
-  // it('should have props', () => {
-  //   // wrapper = shallow(<SearchBar includedProp='Trie' />)
-  //   console.log(wrapper.props().cleanLocation)
-  //   expect(wrapper.props().cleanLocation).toEqual(() => {})
-  // })
+  it('should have props', () => {
+    expect(wrapper.props().children[2].props.children[0]).toEqual('51')
+
+
+  })
 })

@@ -6,7 +6,6 @@ import './current.css';
 
 
 function Current(props) {
-console.log(props)
 	return (
 		<div className="current">
 				<h3 className='current-location'>{props.data.display_location.full} - <span className='day-label'>{props.day}</span> </h3>

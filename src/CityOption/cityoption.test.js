@@ -3,7 +3,6 @@ import CityOption from './CityOption'
 import { mount, shallow } from 'enzyme';
 import { data } from '../fakeapi'
 
-// import App from '/App.js';
 
 let props = {
   city: 'Denver, CO'
@@ -27,7 +26,6 @@ describe('CityOption', ()=>{
   });
 
   it('should have a prop of city', () => {
-    console.log(wrapper.props())
     expect(wrapper.props().value).toBe('Denver, CO')
   })
 })
