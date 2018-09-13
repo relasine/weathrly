@@ -59,7 +59,10 @@ class App extends Component {
           });
         })
         .catch(error => {
-        
+          this.setState({
+            data: undefined
+          });
+          alert('This is not a valid city/state')
         });
     } else if (this.state.zipLocation) {
       fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.zipLocation}.json`)
@@ -71,7 +74,10 @@ class App extends Component {
           });
         })
         .catch(error => {
-        
+          this.setState({
+            data: undefined
+          });
+          alert('This is not a valid zip code')
         });
     }
 
@@ -79,11 +85,17 @@ class App extends Component {
 
   componentDidMount() {
     let currentLocation = (localStorage.getItem('storedLocation')) || undefined;
+    let currentZip = (localStorage.getItem('storedZip')) || undefined;
 
     let parsedLocation;
+    let parsedZip;
 
     if (currentLocation) {
       parsedLocation = JSON.parse(currentLocation);
+    }
+
+    if (currentZip) {
+      parsedZip = JSON.parse(currentZip);
     }
 
 
@@ -92,6 +104,10 @@ class App extends Component {
         cityLocation: parsedLocation.city,
         stateLocation: parsedLocation.state,
         trie: new Trie()
+      });
+    } else if (currentZip) {
+      this.setState({
+        zipLocation: parsedZip
       });
     }
 
@@ -131,12 +147,20 @@ class App extends Component {
     localStorage.setItem('storedLocation', JSON.stringify(locationObj));
   }
 
+  setStorageZip(zip) {
+    localStorage.setItem('storedZip', JSON.stringify(zip));
+  }
+
   render() {
 
     console.log(this.state.data)
 
     if (this.state.cityLocation) {
       this.setStorage(this.state.cityLocation, this.state.stateLocation);
+    }
+
+    if (this.state.zipLocation) {
+      this.setStorageZip(this.state.zipLocation);
     }
 
     if (this.state.data) {
