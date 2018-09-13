@@ -38,9 +38,4 @@ describe('TenDay', ()=>{
     expect(wrapper.find('article').length).toBe(0);
   })
 
-  // it('should have props', () => {
-  //   // wrapper = shallow(<SearchBar includedProp='Trie' />)
-  //   console.log(wrapper.props().cleanLocation)
-  //   expect(wrapper.props().cleanLocation).toEqual(() => {})
-  // })
 })
