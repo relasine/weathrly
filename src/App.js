@@ -19,6 +19,7 @@ class App extends Component {
       location: undefined,
       cityLocation: undefined,
       stateLocation: undefined,
+      zipLocation: undefined,
       sevenHourSelected: true,
       tenDaySelected: false,
       current: true,
@@ -29,6 +30,7 @@ class App extends Component {
     this.toggleTenDay = this.toggleTenDay.bind(this);
     this.cleanLocation = this.cleanLocation.bind(this);
     this.fetchCall = this.fetchCall.bind(this);
+    this.checkZip = this.checkZip.bind(this);
 
   }
 
@@ -49,6 +51,18 @@ class App extends Component {
   fetchCall() {
     if (this.state.cityLocation) { 
       fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            current: true,
+            data: data
+          });
+        })
+        .catch(error => {
+        
+        });
+    } else if (this.state.zipLocation) {
+      fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.zipLocation}.json`)
         .then(response => response.json())
         .then(data => {
           this.setState({
@@ -100,7 +114,15 @@ class App extends Component {
       stateLocation: stateLocation,
       current: false
     });
+  }
 
+  checkZip(zip) {
+    if (zip) {
+      this.setState({
+        zipLocation: zip,
+        current: false
+      })
+    }
   }
 
   setStorage(city, state) {
@@ -111,6 +133,8 @@ class App extends Component {
 
   render() {
 
+    console.log(this.state.data)
+
     if (this.state.cityLocation) {
       this.setStorage(this.state.cityLocation, this.state.stateLocation);
     }
@@ -119,7 +143,7 @@ class App extends Component {
       return (
         <div className="App">
           <section className="search-section">
-            <SearchBar trie={this.state.trie} cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
+            <SearchBar trie={this.state.trie} checkZip={this.checkZip} cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
           <Current  day={ this.state.data.forecast.txt_forecast.forecastday[0].title}
             data={ this.state.data.current_observation }
@@ -144,7 +168,7 @@ class App extends Component {
           <section className='logo-section'>
             <h1 className="logo-label">WThRly</h1><img className='logo-img' src="./windy.svg" alt='logo' />
           </section>
-          <Welcome cleanLocation={ this.cleanLocation } trie={this.state.trie}/>
+          <Welcome cleanLocation={ this.cleanLocation } checkZip={this.checkZip} trie={this.state.trie}/>
         </div>
       );
     }

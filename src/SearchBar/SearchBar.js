@@ -17,14 +17,20 @@ export default class SearchBar extends Component{
     return(
       <div className="location-container">
       <input list="cityList" onChange={(event)=>{
-        if (this.props.trie.suggest) {
-          let wordArray = event.target.value.split('');
-          const upperCaseFirst = wordArray.shift().toUpperCase();
-          wordArray.unshift(upperCaseFirst);
-          this.setState({
-            cityArray: this.props.trie.suggest(wordArray.join('')),
-            location: wordArray.join('')
-          }) 
+        if (this.props.trie.suggest && event.target.value) {
+            if (!parseInt(event.target.value)) {
+            let wordArray = event.target.value.split('');
+            const upperCaseFirst = wordArray.shift().toUpperCase();
+            wordArray.unshift(upperCaseFirst);
+            this.setState({
+              cityArray: this.props.trie.suggest(wordArray.join('')),
+              location: wordArray.join('')
+            }) 
+          } else if (parseInt(event.target.value) && event.target.value.length === 5){
+            this.setState({
+              locationZip: parseInt(event.target.value)
+            })
+          }
         } else if (!event.target.value) {
           this.setState({
             cityArray: [],
@@ -47,6 +53,8 @@ export default class SearchBar extends Component{
         event.preventDefault();
         if (this.state.location === this.state.cityArray[0] && this.state.location) {
           this.props.cleanLocation(this.state.location);
+        } else if (this.state.locationZip) {
+          this.props.checkZip(this.state.locationZip);
         }
       }} className={this.props.magnifierDivClass}><img className={this.props.magnifierClass} src="./magnifier.svg" alt="search-button"/></div>
       </div>
