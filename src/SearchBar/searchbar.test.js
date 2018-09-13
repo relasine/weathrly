@@ -2,16 +2,14 @@ import React from 'react';
 import SearchBar from './SearchBar'
 import { mount, shallow } from 'enzyme';
 import CityOption from '../CityOption/CityOption'
-
-// import App from '/App.js';
-
+import { data } from '../fakeapi';
 
 describe('SearchBar', ()=>{
 
   let wrapper;
 
   beforeEach(()=>{
-    wrapper = shallow(<SearchBar cleanLocation={() => {}} />)
+    wrapper = shallow(<SearchBar cleanLocation={() => {}} trie={{hi: "I'm a tree"}} magnifierClass={'mag-class'}/>)
   });
 
   it.skip('should exist', () => {
@@ -39,9 +37,7 @@ describe('SearchBar', ()=>{
     expect(wrapper.state().cityArray).toEqual(['Chicago, IL']);
   });
 
-  // it('should have props', () => {
-  //   // wrapper = shallow(<SearchBar includedProp='Trie' />)
-  //   console.log(wrapper.props().cleanLocation)
-  //   expect(wrapper.props().cleanLocation).toEqual(() => {})
-  // })
+  it('should have props', () => {
+    expect(wrapper.props().children[2].props.children.props.className).toEqual('mag-class')
+  });
 })
