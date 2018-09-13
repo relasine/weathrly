@@ -18,9 +18,12 @@ export default class SearchBar extends Component{
       <div className="location-container">
       <input list="cityList" onChange={(event)=>{
         if (this.props.trie.suggest) {
+          let wordArray = event.target.value.split('');
+          const upperCaseFirst = wordArray.shift().toUpperCase();
+          wordArray.unshift(upperCaseFirst);
           this.setState({
-            cityArray: this.props.trie.suggest(event.target.value),
-            location: event.target.value
+            cityArray: this.props.trie.suggest(wordArray.join('')),
+            location: wordArray.join('')
           }) 
         } else if (!event.target.value) {
           this.setState({
