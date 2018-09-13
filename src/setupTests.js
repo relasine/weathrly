@@ -17,3 +17,6 @@ class LocalStorage {
     this.store = {};
   }
 }
+
+global.localStorage = new LocalStorage;
+
