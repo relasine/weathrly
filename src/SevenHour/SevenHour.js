@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import Hourly from '../Hourly/Hourly'
 import './sevenhour.css';
 

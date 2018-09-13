@@ -1,6 +1,7 @@
 import React from 'react';
 import TenDay from './TenDay'
 import { mount, shallow } from 'enzyme';
+import data from '../fakeapi'
 
 // import App from '/App.js';
 
