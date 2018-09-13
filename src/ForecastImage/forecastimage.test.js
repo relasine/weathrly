@@ -7,10 +7,6 @@ describe('ForecastImage', ()=>{
 
   let wrapper;
 
-  let props = {
-
-  }
-
   beforeEach(()=>{
     wrapper = shallow(<ForecastImage icon='rain'/>)
   });
