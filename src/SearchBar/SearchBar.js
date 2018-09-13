@@ -17,12 +17,25 @@ export default class SearchBar extends Component{
     return(
       <div className="location-container">
       <input list="cityList" onChange={(event)=>{
-        if (this.props.trie.suggest) {
+        if (this.props.trie.suggest && event.target.value) {
+            if (!parseInt(event.target.value, 10)) {
+            let wordArray = event.target.value.split('');
+            const upperCaseFirst = wordArray.shift().toUpperCase();
+            wordArray.unshift(upperCaseFirst);
+            this.setState({
+              cityArray: this.props.trie.suggest(wordArray.join('')),
+              location: wordArray.join('')
+            }) 
+          } else if (parseInt(event.target.value, 10) && event.target.value.length === 5){
+            this.setState({
+              locationZip: parseInt(event.target.value, 10)
+            })
+          }
+        } else if (!event.target.value) {
           this.setState({
-            cityArray: this.props.trie.suggest(event.target.value),
-            location: event.target.value
+            cityArray: [],
+            location: undefined
           })
-          console.log(this.state)
         }
       }} className={this.props.inputClass} value={this.state.location} type='text' name="location-input" placeholder='City/Zip'></input>
 
@@ -38,8 +51,10 @@ export default class SearchBar extends Component{
 
       <div onClick={(event)=>{
         event.preventDefault();
-        if (this.state.location === this.state.cityArray[0]) {
+        if (this.state.location === this.state.cityArray[0] && this.state.location) {
           this.props.cleanLocation(this.state.location);
+        } else if (this.state.locationZip) {
+          this.props.checkZip(this.state.locationZip);
         }
       }} className={this.props.magnifierDivClass}><img className={this.props.magnifierClass} src="./magnifier.svg" alt="search-button"/></div>
       </div>

@@ -75,19 +75,15 @@ article {
 }
 
 @media (max-width: 740px) {
-  .current,
-  .weather-img {
-    display: block;
-  }
 
   .current {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
 
-  .weather-img,
-  .weather-img-aside {
-    margin: auto;
+
+  .weather-img {
+    width: 11rem;
   }
 
   article {
@@ -97,8 +93,21 @@ article {
   .temperature,
   .wind,
   .humidity,
-  .highlow {
+  .highlow,
+  .weather-label {
     text-align: center;
+    margin-left: 0
+  }
+
+  .wind,
+  .humidity,
+  .highlow,
+  .weather-label {
+    font-size: 1rem;
+  }
+
+  .temperature {
+    font-size: 5rem;
   }
 
   .weather-description {

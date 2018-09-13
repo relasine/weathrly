@@ -1001,6 +1001,6 @@ const cities = {
     "Beloit, WI",
     "Panama City, FL"
   ]
-}
+};
 
 export default cities;

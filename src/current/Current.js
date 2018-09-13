@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { data } from '../fakeapi'
 import ForecastImage from '../ForecastImage/ForecastImage';
 import './current.css';
 

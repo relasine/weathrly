@@ -12,3 +12,9 @@
 .daily-temps {
   font-size: 1rem;
 }
+
+@media (max-width: 750px) {
+  .daily-weather {
+    height: 180px;
+  }
+}

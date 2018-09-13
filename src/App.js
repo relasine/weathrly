@@ -8,10 +8,10 @@ import Welcome from './Welcome/Welcome';
 import SearchBar from './SearchBar/SearchBar';
 import apikey from './apikey';
 import Trie from '@relasine/auto-complete';
-import cities from './cities'
+import cities from './cities';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
@@ -19,16 +19,18 @@ class App extends Component {
       location: undefined,
       cityLocation: undefined,
       stateLocation: undefined,
+      zipLocation: undefined,
       sevenHourSelected: true,
       tenDaySelected: false,
       current: true,
       trie: new Trie()
-    }
+    };
 
     this.toggleSevenHour = this.toggleSevenHour.bind(this);
     this.toggleTenDay = this.toggleTenDay.bind(this);
     this.cleanLocation = this.cleanLocation.bind(this);
     this.fetchCall = this.fetchCall.bind(this);
+    this.checkZip = this.checkZip.bind(this);
 
   }
 
@@ -47,38 +49,70 @@ class App extends Component {
   }
 
   fetchCall() {
-
     if (this.state.cityLocation) { 
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          current: true,
-          data: data
+      fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            current: true,
+            data: data
+          });
         })
-      })
-      .catch(error => {
-      });
-    } else {
+        .catch(error => {
+          this.setState({
+            data: undefined
+          });
+
+          localStorage.clear();
+          alert('This is not a valid city/state')
+        });
+    } else if (this.state.zipLocation) {
+      fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.zipLocation}.json`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            current: true,
+            data: data
+          });
+        })
+        .catch(error => {
+          this.setState({
+            data: undefined
+          });
+
+          localStorage.clear();
+          alert('This is not a valid zip code')
+        });
     }
 
   }
 
   componentDidMount() {
     let currentLocation = (localStorage.getItem('storedLocation')) || undefined;
+    let currentZip = (localStorage.getItem('storedZip')) || undefined;
 
     let parsedLocation;
+    let parsedZip;
 
     if (currentLocation) {
-      parsedLocation = JSON.parse(currentLocation)
+      parsedLocation = JSON.parse(currentLocation);
     }
+
+    if (currentZip) {
+      parsedZip = JSON.parse(currentZip);
+    }
+
 
     if (parsedLocation) {
       this.setState({
-        cityLocation: currentLocation.city,
-        stateLocation: currentLocation.state,
-        // trie: new Trie()
-      })
+        cityLocation: parsedLocation.city,
+        stateLocation: parsedLocation.state,
+        trie: new Trie()
+      });
+    } else if (currentZip) {
+      this.setState({
+        zipLocation: parsedZip
+      });
     }
 
     this.state.trie.populate(cities.data);
@@ -100,52 +134,72 @@ class App extends Component {
       stateLocation: stateLocation,
       current: false
     });
+  }
 
+  checkZip(zip) {
+    if (zip) {
+      this.setState({
+        zipLocation: zip,
+        current: false
+      })
+    }
   }
 
   setStorage(city, state) {
-    let locationObj = {city: city, state: state}
-    localStorage.setItem('storedLocation', JSON.stringify(locationObj))
+    let locationObj = {city: city, state: state};
+    localStorage.setItem('storedLocation', JSON.stringify(locationObj));
+  }
+
+  setStorageZip(zip) {
+    localStorage.setItem('storedZip', JSON.stringify(zip));
   }
 
   render() {
 
-    if(this.state.cityLocation) {
-      this.setStorage(this.state.cityLocation, this.state.stateLocation)
+    if (this.state.cityLocation) {
+          localStorage.clear()
+
+      this.setStorage(this.state.cityLocation, this.state.stateLocation);
     }
 
-    if(this.state.data){
+    if (this.state.zipLocation) {
+          localStorage.clear()
+
+      this.setStorageZip(this.state.zipLocation);
+    }
+
+    if (this.state.data) {
       return (
         <div className="App">
           <section className="search-section">
-            <SearchBar trie={this.state.trie} cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
+            <SearchBar trie={this.state.trie} checkZip={this.checkZip} cleanLocation={this.cleanLocation} inputClass="main-input" magnifierDivClass="main-magnifier-div" magnifierClass="main-magnifier"/>
           </section>
           <Current  day={ this.state.data.forecast.txt_forecast.forecastday[0].title}
-                    data={ this.state.data.current_observation }
-                    forecastTemp = { this.state.data.forecast.simpleforecast.forecastday[0]} />
+            data={ this.state.data.current_observation }
+            forecastTemp = { this.state.data.forecast.simpleforecast.forecastday[0]} />
           <section className='bottom-section'>
             <Toggle toggleSevenHour={ this.toggleSevenHour }
-                    toggleTenDay={ this.toggleTenDay }
-                    toggleStateSevenHour={ this.state.sevenHourSelected }
-                    toggleStateTenDay={ this.state.tenDaySelected }
+              toggleTenDay={ this.toggleTenDay }
+              toggleStateSevenHour={ this.state.sevenHourSelected }
+              toggleStateTenDay={ this.state.tenDaySelected }
             />
             <SevenHour  data={ this.state.data.hourly_forecast }
-                        toggleState={ this.state.sevenHourSelected } />
+              toggleState={ this.state.sevenHourSelected } />
             <TenDay data={this.state.data.forecast.simpleforecast.forecastday}
-                    toggleState={ this.state.tenDaySelected }/>
+              toggleState={ this.state.tenDaySelected }/>
           </section>
         </div>
       );
 
-    }else{
-      return(
+    } else {
+      return (
         <div className="App">
           <section className='logo-section'>
             <h1 className="logo-label">WThRly</h1><img className='logo-img' src="./windy.svg" alt='logo' />
           </section>
-          <Welcome cleanLocation={ this.cleanLocation } trie={this.state.trie}/>
+          <Welcome cleanLocation={ this.cleanLocation } checkZip={this.checkZip} trie={this.state.trie}/>
         </div>
-      )
+      );
     }
   }
 }

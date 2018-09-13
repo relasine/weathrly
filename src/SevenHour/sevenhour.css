@@ -7,3 +7,9 @@
   max-width: 50rem;
   height: 11rem;
 }
+
+@media (max-width: 820px) {
+  .seven-hour {
+    
+  }
+}
