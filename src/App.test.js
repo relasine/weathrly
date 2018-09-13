@@ -24,7 +24,7 @@ describe('SearchBar', ()=>{
     });
   });
 
-  it('should exist', () => {
+  it.skip('should exist', () => {
     expect(wrapper).toBeDefined();
   });
 
@@ -51,15 +51,8 @@ describe('SearchBar', ()=>{
     expect(wrapper.state().cityLocation).toEqual(['Chicago, IL']);
   });
 
-  it.skip('should make an api call and receive a response', () => {
-    
-    fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/CO/Denver.json`)
-        .then(response => response.json())
-        .then(data => { })
-        .catch(error => {
-        });
-
-    expect(data.current_observation.image.title).toEqual('Weather Underground');
+  it('should have a populated pre-trie', () => {
+    expect(wrapper.state().trie.wordCount).toEqual(1000);
   })
-  
+
 });
