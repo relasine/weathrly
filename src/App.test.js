@@ -24,7 +24,7 @@ describe('SearchBar', ()=>{
     });
   });
 
-  it.skip('should exist', () => {
+  it('should exist', () => {
     expect(wrapper).toBeDefined();
   });
 
@@ -45,14 +45,21 @@ describe('SearchBar', ()=>{
 
   it('should have multiple state properties', () => {
     wrapper.setState({ location: 'Chica' });
-    wrapper.setState({ cityLocation: ['Chicago, IL']});
+    wrapper.setState({ cityLocation: ['Chicago']});
 
     expect(wrapper.state().location).toEqual('Chica');
-    expect(wrapper.state().cityLocation).toEqual(['Chicago, IL']);
+    expect(wrapper.state().cityLocation).toEqual(['Chicago']);
   });
 
   it('should have a populated pre-trie', () => {
     expect(wrapper.state().trie.wordCount).toEqual(1000);
+  })
+
+  it('should be able to put data in local storage via setState', () => {
+    localStorage.clear()
+    wrapper.setState({ cityLocation: 'Chicago'});
+
+    expect(localStorage).toEqual({"store": {"storedLocation": "{\"city\":\"Chicago\"}"}})
   })
 
 });
