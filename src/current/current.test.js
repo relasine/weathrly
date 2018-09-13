@@ -30,7 +30,6 @@ describe('Current', ()=>{
   });
 
   it('should have props', () => {
-
     expect(wrapper.props().children[0].props.children[0]).toEqual('Louisville, KY')
   })
 
