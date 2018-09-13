@@ -67,8 +67,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let currentLocation = JSON.parse(localStorage.getItem('storedLocation')) || undefined;
+    let currentLocation = (localStorage.getItem('storedLocation')) || undefined;
+
+    let parsedLocation;
+
     if (currentLocation) {
+      parsedLocation = JSON.parse(currentLocation)
+    }
+
+    if (parsedLocation) {
       this.setState({
         cityLocation: currentLocation.city,
         stateLocation: currentLocation.state,
