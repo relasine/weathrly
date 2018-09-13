@@ -1,7 +1,6 @@
 .ten-day {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  /*justify-content: space-around;*/
   max-width: 70rem;
   height: 11rem;
   margin: auto;
@@ -10,8 +9,15 @@
 
 @media (max-width: 1150px) {
   .ten-day {
-    height: 22rem;
+    height: 28rem;
     max-width: 700px;
     grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .ten-day {
+    grid-template-columns: repeat(4, 1fr);
+    height: 35rem;
   }
 }
