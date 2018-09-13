@@ -47,7 +47,6 @@ class App extends Component {
   }
 
   fetchCall() {
-
     if (this.state.cityLocation) { 
       fetch(`http://api.wunderground.com/api/${apikey}/conditions/hourly/forecast10day/q/${this.state.stateLocation}/${this.state.cityLocation}.json`)
         .then(response => response.json())
@@ -73,11 +72,12 @@ class App extends Component {
       parsedLocation = JSON.parse(currentLocation);
     }
 
+
     if (parsedLocation) {
       this.setState({
-        cityLocation: currentLocation.city,
-        stateLocation: currentLocation.state,
-        // trie: new Trie()
+        cityLocation: parsedLocation.city,
+        stateLocation: parsedLocation.state,
+        trie: new Trie()
       });
     }
 
