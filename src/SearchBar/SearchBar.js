@@ -18,7 +18,7 @@ export default class SearchBar extends Component{
       <div className="location-container">
       <input list="cityList" onChange={(event)=>{
         if (this.props.trie.suggest && event.target.value) {
-            if (!parseInt(event.target.value)) {
+            if (!parseInt(event.target.value, 10)) {
             let wordArray = event.target.value.split('');
             const upperCaseFirst = wordArray.shift().toUpperCase();
             wordArray.unshift(upperCaseFirst);
@@ -26,9 +26,9 @@ export default class SearchBar extends Component{
               cityArray: this.props.trie.suggest(wordArray.join('')),
               location: wordArray.join('')
             }) 
-          } else if (parseInt(event.target.value) && event.target.value.length === 5){
+          } else if (parseInt(event.target.value, 10) && event.target.value.length === 5){
             this.setState({
-              locationZip: parseInt(event.target.value)
+              locationZip: parseInt(event.target.value, 10)
             })
           }
         } else if (!event.target.value) {

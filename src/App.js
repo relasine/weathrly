@@ -62,6 +62,8 @@ class App extends Component {
           this.setState({
             data: undefined
           });
+
+          localStorage.clear();
           alert('This is not a valid city/state')
         });
     } else if (this.state.zipLocation) {
@@ -77,6 +79,8 @@ class App extends Component {
           this.setState({
             data: undefined
           });
+
+          localStorage.clear();
           alert('This is not a valid zip code')
         });
     }
@@ -143,7 +147,6 @@ class App extends Component {
 
   setStorage(city, state) {
     let locationObj = {city: city, state: state};
-
     localStorage.setItem('storedLocation', JSON.stringify(locationObj));
   }
 
@@ -153,13 +156,15 @@ class App extends Component {
 
   render() {
 
-    console.log(this.state.data)
-
     if (this.state.cityLocation) {
+          localStorage.clear()
+
       this.setStorage(this.state.cityLocation, this.state.stateLocation);
     }
 
     if (this.state.zipLocation) {
+          localStorage.clear()
+
       this.setStorageZip(this.state.zipLocation);
     }
 
